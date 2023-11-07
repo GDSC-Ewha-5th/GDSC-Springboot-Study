@@ -4,11 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="" />
+    <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -19,7 +34,6 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
@@ -38,15 +52,62 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "/Users/hayunji/gdsc-5th-spring-rest-api",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "e69acd16ba98effc59b721916c4d36a0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.gdsc5thspringrestapi.events" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.gdsc5thspringrestapi.events" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.EventTest.javaBean">
+    <configuration name="EventTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventTest.javaBean" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
+      <option name="METHOD_NAME" value="javaBean" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Gdsc5thSpringRestApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gdsc-5th-spring-rest-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.gdsc5thspringrestapi.Gdsc5thSpringRestApiApplication" />
@@ -54,6 +115,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EventTest.javaBean" />
+        <item itemvalue="JUnit.EventTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -64,6 +131,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699366599337</updated>
       <workItem from="1699366601161" duration="1753000" />
+      <workItem from="1699368363601" duration="1795000" />
     </task>
     <servers />
   </component>
