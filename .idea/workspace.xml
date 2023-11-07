@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699366599337</updated>
       <workItem from="1699366601161" duration="1753000" />
-      <workItem from="1699368363601" duration="1795000" />
+      <workItem from="1699368363601" duration="2952000" />
     </task>
     <servers />
   </component>
