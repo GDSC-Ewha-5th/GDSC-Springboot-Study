@@ -22,19 +22,29 @@ public class EventController {
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
 
+    private final EventValidator eventValidator;
+
     //생성자가 하나만 있고, 이 생성자로 받아올 파라미터가 이미 빈으로 등록되었다면 Autowired 생략 가능
-    public EventController(EventRepository eventRepository, ModelMapper modelMapper) {
+    public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventValidator eventValidator) {
         this.eventRepository = eventRepository;
         this.modelMapper = modelMapper;
+        this.eventValidator = eventValidator;
     }
 
 
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors){ //검증 결과를 error에 넣음
 
-        if(errors.hasErrors()){
+        if(errors.hasErrors()){ //@Valid -> 비어있는지 검증
             return ResponseEntity.badRequest().build();
         }
+
+        eventValidator.validate(eventDto,errors);
+        if(errors.hasErrors()){ //잘못된 값 들어있는지 검증
+            return ResponseEntity.badRequest().build();
+        }
+
+
         Event event = modelMapper.map(eventDto, Event.class);
 
         Event newEvent = this.eventRepository.save(event);
