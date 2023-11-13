@@ -2,6 +2,7 @@ package com.example.springstudymavenver.events;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
@@ -10,7 +11,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
+@Entity
 public class Event {
+
+    @Id
+    @GeneratedValue
+    private Integer id; //식별자
+
     private String name;
     private String description;
     private LocalDateTime beginEnrollmentDateTime;
@@ -18,13 +25,15 @@ public class Event {
     private LocalDateTime beginEventDateTime;
     private LocalDateTime endEventDateTime;
     private String location; // (optional) 이게 없으면 온라인 모임 private int basePrice; // (optional)
+    private int basePrice;
     private int maxPrice; // (optional)
     private int limitOfEnrollment;
 
     //추가 필드
-    private Integer id; //식별자
     private boolean offline;
     private boolean free;
+
+    @Enumerated(EnumType.STRING) //기본값이 Ordinal(순서대로 정수값으로 저장됨- 추후 enum의 순서가 바뀌면 꼬일수 있음) 인데 String으로 바꿔주는게 좋음
     private EventStatus eventStatus = EventStatus.DRAFT;
 
 }
