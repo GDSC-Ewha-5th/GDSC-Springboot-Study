@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.capture&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;e69acd16ba98effc59b721916c4d36a0&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -74,7 +74,38 @@
       <recent name="com.example.gdsc5thspringrestapi.events" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EventTest.javaBean">
+  <component name="RunManager" selected="JUnit.EventControllerTests.createEvent">
+    <configuration name="EventControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventControllerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventControllerTests.createEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventControllerTests" />
+      <option name="METHOD_NAME" value="createEvent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EventTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gdsc-5th-spring-rest-api" />
       <extension name="coverage">
@@ -115,6 +146,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EventControllerTests.createEvent" />
+        <item itemvalue="JUnit.EventControllerTests" />
         <item itemvalue="JUnit.EventTest.javaBean" />
         <item itemvalue="JUnit.EventTest" />
       </list>
@@ -130,11 +163,27 @@
       <updated>1699366599337</updated>
       <workItem from="1699366601161" duration="1753000" />
       <workItem from="1699368363601" duration="2952000" />
-      <workItem from="1699896502063" duration="772000" />
+      <workItem from="1699896502063" duration="2053000" />
+      <workItem from="1699898562397" duration="640000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

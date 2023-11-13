@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -20,11 +21,14 @@ public class EventControllerTests {
 
     @Test
     public void createEvent() throws Exception { //perform에 빨간줄 뜨면 alt+enter로 exception import
-        mockMvc.perform(post("/api.events/")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaTypes.HAL_JSON) //HAL의 스펙을 만족하는 응답을 받고싶다
-                        )  //perform 안에 주는게 요청임
+        mockMvc.perform(post("/api/events")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaTypes.HAL_JSON))
+                .andDo(print())
                 .andExpect(status().isCreated());
+        //HAL의 스펙을 만족하는 응답을 받고싶다
+        //perform 안에 주는게 요청임
+
     }
 
 }
