@@ -10,16 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest// EventController 클래스를 대상으로 설정
@@ -54,7 +55,7 @@ public class EventControllerTests {
                 .build();
 
         event.setId(10);
-        Mockito.when(eventRepository.save(event)).thenReturn(event);
+        Mockito.when(eventRepository.save(event)).thenReturn(event); //eventRepository의 결과가 항상 널이 나오기 때문에 스톱핑 해줘야
 
         mockMvc.perform(post("/api/events/")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -63,7 +64,10 @@ public class EventControllerTests {
 
                 .andDo(print()) //실제 콘솔에서 어떤 요청과 응답을 받았는지 확인 가능
                 .andExpect(status().isCreated()) // 201 - Created
-                .andExpect(jsonPath("id").exists()); //응답에 id값이 있는지 확인
+                .andExpect(jsonPath("id").exists())
+                .andExpect(header().exists(HttpHeaders.LOCATION))
+                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE));
+
     }
 
 }
