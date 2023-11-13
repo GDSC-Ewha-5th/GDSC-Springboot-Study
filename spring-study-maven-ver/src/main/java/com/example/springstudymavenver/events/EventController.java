@@ -36,12 +36,12 @@ public class EventController {
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors){ //검증 결과를 error에 넣음
 
         if(errors.hasErrors()){ //@Valid -> 비어있는지 검증
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors);
         }
 
         eventValidator.validate(eventDto,errors);
         if(errors.hasErrors()){ //잘못된 값 들어있는지 검증
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors);
         }
 
 
