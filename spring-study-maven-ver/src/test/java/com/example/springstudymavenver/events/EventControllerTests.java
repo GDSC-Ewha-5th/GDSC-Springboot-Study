@@ -65,15 +65,8 @@ public class EventControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))//json으로 줘야함
-
                 .andDo(print()) //실제 콘솔에서 어떤 요청과 응답을 받았는지 확인 가능
-                .andExpect(status().isCreated()) // 201 - Created
-                .andExpect(jsonPath("id").exists())
-                .andExpect(header().exists(HttpHeaders.LOCATION))
-                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE))
-                .andExpect(jsonPath("id").value(Matchers.not(100)))
-                .andExpect(jsonPath("free").value(Matchers.not(true)))
-                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+                .andExpect(status().isBadRequest()) // 입력값 외의 다른 값이 들어오면 에러 발생시키쟈!!!
         ;
 
     }
