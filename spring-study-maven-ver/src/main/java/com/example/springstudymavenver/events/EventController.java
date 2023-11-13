@@ -1,5 +1,6 @@
 package com.example.springstudymavenver.events;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,15 +16,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 public class EventController {
 
     private final EventRepository eventRepository;
+    private final ModelMapper modelMapper;
 
     //생성자가 하나만 있고, 이 생성자로 받아올 파라미터가 이미 빈으로 등록되었다면 Autowired 생략 가능
-    public EventController(EventRepository eventRepository) {
+    public EventController(EventRepository eventRepository, ModelMapper modelMapper) {
         this.eventRepository = eventRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody Event event){
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto){
+        Event event = modelMapper.map(eventDto, Event.class);
 
         Event newEvent = this.eventRepository.save(event);
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();   //uri 만들기 - methodOn 쓰는 이유 이해안됨 -> url이 eventcontroller에 있지 않아서?
