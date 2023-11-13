@@ -2,6 +2,7 @@ package com.example.springstudymavenver.events;
 
 //import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -37,9 +38,40 @@ public class EventControllerTests {
     ObjectMapper objectMapper; //이미 빈으로 등록 되어있음
     // Mapping Jackson을 의존성으로 들어가 있으면 objectMapper을 빈으로 자동 등록해줌
 
-
     @Test
     public void createEvent() throws Exception {
+        //Request
+        EventDto event = EventDto.builder()
+                .name("Spring")
+                .description("REST API Development with Spring")
+                .beginEnrollmentDateTime(LocalDateTime.of(2018, 11, 23, 14, 21))
+                .closeEnrollmentDateTime(LocalDateTime.of(2018, 11, 24, 14, 21))
+                .beginEventDateTime(LocalDateTime.of(2018, 11, 25, 14, 21))
+                .endEventDateTime(LocalDateTime.of(2018, 11, 26, 14, 21))
+                .basePrice(100)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("강남역 D2 스타텁 팩토리")
+                .build();
+
+        mockMvc.perform(post("/api/events/")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .accept(MediaTypes.HAL_JSON)
+                        .content(objectMapper.writeValueAsString(event)))//json으로 줘야함
+                .andDo(print()) //실제 콘솔에서 어떤 요청과 응답을 받았는지 확인 가능
+                .andExpect(status().isCreated()) // 201 - Created
+                .andExpect(jsonPath("id").exists())
+                .andExpect(header().exists(HttpHeaders.LOCATION))
+                .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE))
+                .andExpect(jsonPath("id").value(Matchers.not(100)))
+                .andExpect(jsonPath("free").value(Matchers.not(true)))
+                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+        ;
+
+    }
+
+    @Test
+    public void createEvent_Bad_Request() throws Exception {
         //Request
         Event event  = Event.builder()
                 .id(100)
@@ -68,6 +100,17 @@ public class EventControllerTests {
                 .andDo(print()) //실제 콘솔에서 어떤 요청과 응답을 받았는지 확인 가능
                 .andExpect(status().isBadRequest()) // 입력값 외의 다른 값이 들어오면 에러 발생시키쟈!!!
         ;
+
+    }
+
+    @Test
+    public void createEvent_Bad_Request_Empty_Input() throws Exception {
+        EventDto eventDto = EventDto.builder().build();
+
+        this.mockMvc.perform(post("/api/events")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(this.objectMapper.writeValueAsString(eventDto))) //비어있는 것만 보냄
+                .andExpect(status().isBadRequest());
 
     }
 
