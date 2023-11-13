@@ -36,4 +36,17 @@ public class Event {
     @Enumerated(EnumType.STRING) //기본값이 ordinal(순서대로 정수값으로 저장됨- 추후 enum의 순서가 바뀌면 꼬일수 있음) 인데 String으로 바꿔주는게 좋음
     private EventStatus eventStatus = EventStatus.DRAFT;
 
+    public void update() {
+        if(this.basePrice ==0 &&this.maxPrice==0){
+            this.free = true;
+        }else{
+            this.free = false;
+        }
+
+        if(this.location == null || this.location.isBlank()){
+            this.offline = false;
+        }else{
+            this.offline = true;
+        }
+    }
 }

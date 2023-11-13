@@ -46,6 +46,7 @@ public class EventController {
 
 
         Event event = modelMapper.map(eventDto, Event.class);
+        event.update();
 
         Event newEvent = this.eventRepository.save(event);
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();   //uri 만들기 - methodOn 쓰는 이유 이해안됨 -> url이 eventcontroller에 있지 않아서?
