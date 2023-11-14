@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 
 import java.io.IOException;
 
-@JsonComponent //ObjectMapper는 Errors 객체를 Serialization할  때 사용한다.
+@JsonComponent //ObjectMapper는 Errors 객체를 Serialization할 때 사용한다.
 public class ErrorsSerializer extends JsonSerializer<Errors> {
 
     @Override
