@@ -1,6 +1,11 @@
 package com.project.restapiwithspring.events;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -31,67 +36,52 @@ public class EventTest {
         assertThat(event.getDescription()).isEqualTo(description);
     }
 
-    @Test
-    public void testFree() {
+
+    @ParameterizedTest
+    @MethodSource
+    public void testFree(int basePrice, int maxPrice, boolean isFree) {
         // Given
         Event event = Event.builder()
-                .basePrice(0)
-                .maxPrice(0)
+                .basePrice(basePrice)
+                .maxPrice(maxPrice)
                 .build();
 
         // When
         event.update();
 
         // Then
-        assertThat(event.isFree()).isTrue();
-
-        // Given
-        event = Event.builder()
-                .basePrice(100)
-                .maxPrice(0)
-                .build();
-
-        // When
-        event.update();
-
-        // Then
-        assertThat(event.isFree()).isFalse();
-
-        // Given
-        event = Event.builder()
-                .basePrice(0)
-                .maxPrice(100)
-                .build();
-
-        // When
-        event.update();
-
-        // Then
-        assertThat(event.isFree()).isFalse();
+        assertThat(event.isFree()).isEqualTo(isFree);
     }
 
-    @Test
-    public void testOffline() {
-        // Given
+    private static Stream<Arguments> testFree() {
+        return Stream.of(
+                Arguments.of(0,0, true),
+                Arguments.of(100, 0, false),
+                Arguments.of(0, 100, false),
+                Arguments.of(100, 200, false)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    public void testOffline(String location, boolean isOffline) {
+        // given
         Event event = Event.builder()
-                .location("공덕 프론트원")
+                .location(location)
                 .build();
 
-        // When
+        // when
         event.update();
 
-        // Then
-        assertThat(event.isOffline()).isTrue();
+        // then
+        assertThat(event.isOffline()).isEqualTo(isOffline);
+    }
 
-
-        // Given
-        event = Event.builder()
-                .build();
-
-        // When
-        event.update();
-
-        // Then
-        assertThat(event.isOffline()).isFalse();
+    private static Stream<Arguments> testOffline() {
+        return Stream.of(
+                Arguments.of("공덕 프론트원", true),
+                Arguments.of(null, false),
+                Arguments.of("        ", false)
+        );
     }
 }
