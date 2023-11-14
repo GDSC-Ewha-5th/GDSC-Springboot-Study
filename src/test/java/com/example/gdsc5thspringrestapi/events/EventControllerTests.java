@@ -1,5 +1,6 @@
 package com.example.gdsc5thspringrestapi.events;
 
+import com.example.gdsc5thspringrestapi.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -37,6 +38,7 @@ public class EventControllerTests {
     EventRepository eventRepository; //eventRepository에 해당하는 Bean을 mock으로 만듦. mock객체라서 save하더라도 return되는 값이 null임
 
     @Test
+    @TestDescription("정상적으로 이벤트를 생성하는 테스트")
     public void createEvent() throws Exception { //perform에 빨간줄 뜨면 alt+enter로 exception import
         EventDto event = EventDto.builder()
                 .name("Spring")
@@ -72,6 +74,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력 받을 수 없는 값을 사용한 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request() throws Exception {//이상한 값이 들어있을 때 bad request return
         Event event = Event.builder()
                 .id(100)
@@ -103,6 +106,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력 값이 비어있는 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Empty_Input() throws Exception{ //값이 비어있는 필드가 들어온 경우
         EventDto eventDto = EventDto.builder().build();
 
@@ -115,6 +119,7 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력 값이 잚못된 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception{ //값이 비어있는 필드가 들어온 경우
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
