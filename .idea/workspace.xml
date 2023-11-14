@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/common/TestDescription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/common/ErrorsSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +78,7 @@
       <recent name="com.example.gdsc5thspringrestapi.events" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EventControllerTests.createEvent_Bad_Request_Empty_Input">
+  <component name="RunManager" selected="JUnit.EventControllerTests.createEvent_Bad_Request_Wrong_Input">
     <configuration name="EventControllerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gdsc-5th-spring-rest-api" />
       <extension name="coverage">
@@ -163,8 +167,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request_Empty_Input" />
         <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request_Wrong_Input" />
+        <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request_Empty_Input" />
         <item itemvalue="JUnit.EventControllerTests.createEvent" />
         <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request" />
         <item itemvalue="JUnit.EventControllerTests" />

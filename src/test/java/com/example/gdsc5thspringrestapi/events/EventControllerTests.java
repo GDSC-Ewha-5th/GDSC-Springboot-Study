@@ -119,7 +119,7 @@ public class EventControllerTests {
     }
 
     @Test
-    @TestDescription("입력 값이 잚못된 경우에 에러가 발생하는 테스트")
+    @TestDescription("입력 값이 잘못된 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception{ //값이 비어있는 필드가 들어온 경우
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
@@ -138,6 +138,9 @@ public class EventControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$[0].objectName").exists())
+                .andExpect(jsonPath("$[0].defaultMessage").exists())
+                .andExpect(jsonPath("$[0].code").exists())
         ;
 
     }
