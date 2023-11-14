@@ -1,5 +1,6 @@
 package com.project.restapiwithspring.events;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
+@Entity
 public class Event {
+    @Id @GeneratedValue
     private Integer id;
     private String name;
     private String description;
@@ -23,5 +26,11 @@ public class Event {
     private int limitOfEnrollment;
     private boolean offline;
     private boolean free;
-    private EventStatus eventStatus;
+    @Enumerated(EnumType.STRING)
+    private EventStatus eventStatus = EventStatus.DRAFT;
+
+    public void update() {
+        this.free = (this.basePrice == 0 && this.maxPrice == 0) ? true : false;
+        this.offline = (this.location == null || this.location.isBlank()) ? false : true;
+    }
 }
