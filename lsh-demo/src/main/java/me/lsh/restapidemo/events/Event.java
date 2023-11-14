@@ -1,14 +1,17 @@
 package me.lsh.restapidemo.events;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Builder @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @EqualsAndHashCode(of = "id")
+@Entity
 public class Event {
 
-    private int id;
+    @Id @GeneratedValue //(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String description;
     private LocalDateTime beginEnrollmentDateTime;
@@ -21,5 +24,19 @@ public class Event {
     private int limitOfEnrollment;
     private boolean offline;
     private boolean free;
+    @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
+
+    public void update() {
+        if (this.basePrice == 0 && this.maxPrice == 0) {
+            this.free = true;
+        } else {
+            this.free = false;
+        }
+        if (this.location == null || this.location.isBlank()) { //isBlank는 java 11에 추가됨.
+            this.offline = false;
+        } else {
+            this.offline = true;
+        }
+    }
 }
