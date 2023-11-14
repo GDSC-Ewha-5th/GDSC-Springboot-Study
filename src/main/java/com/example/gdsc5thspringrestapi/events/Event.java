@@ -28,5 +28,5 @@ public class Event {
     private boolean offline;
     private boolean free;
     @Enumerated(EnumType.STRING)  //기본값 ordinary로 0, 1 ,2 숫자 값이 저장됨. String은 나중에 내부 순서가 바뀌어도 꼬이지 않음
-    private EventStatus eventStatus;
+    private EventStatus eventStatus = EventStatus.DRAFT;
 }
