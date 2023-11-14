@@ -2,6 +2,7 @@ package com.example.gdsc5thspringrestapi.events;
 
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.Errors;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo; //강의 자료랑 다름! 구글링함
@@ -28,13 +30,16 @@ public class EventController {
 
 
     @PostMapping()
-    public ResponseEntity createEvent(@RequestBody EventDto eventDto) { // 클래스 안에 있는 모든 핸들러들은 HAL_JSON이라는 contentType으로 응답을 보냄
+    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) { // 클래스 안에 있는 모든 핸들러들은 HAL_JSON이라는 contentType으로 응답을 보냄
         // 원래같았으면 eventDto -> Event 로 Builder를 사용해서 옮겼어야함 -> modelMapper를 사용하면 편리함!
 //        Event event = Event.builder()
 //                .name(eventDto.getName())
 //                .description(eventDto.getDescription())
 //                .build();
 
+        if (errors.hasErrors()){ //@Valid에서 발생한 error를 넣어줌
+            return ResponseEntity.badRequest().build();
+        }
         Event event = modelMapper.map(eventDto, Event.class);  //event로 변환
         Event newEvent = this.eventRepository.save(event);
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
