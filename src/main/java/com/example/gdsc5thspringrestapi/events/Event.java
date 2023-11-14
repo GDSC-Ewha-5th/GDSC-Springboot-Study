@@ -29,4 +29,20 @@ public class Event {
     private boolean free;
     @Enumerated(EnumType.STRING)  //기본값 ordinary로 0, 1 ,2 숫자 값이 저장됨. String은 나중에 내부 순서가 바뀌어도 꼬이지 않음
     private EventStatus eventStatus = EventStatus.DRAFT;
+
+    public void update() {
+        //update free
+        if (this.basePrice == 0 && this.maxPrice == 0){
+            this.free = true;
+        }else{
+            this.free = false;
+        }
+
+        //update offline
+        if (this.location == null || this.location.isBlank()){
+            this.offline = false;
+        }else {
+            this.offline = true;
+        }
+    }
 }
