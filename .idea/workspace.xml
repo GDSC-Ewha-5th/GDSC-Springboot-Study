@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6894857e-9781-4962-ade8-d630121e919a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gdsc5thspringrestapi/events/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/gdsc5thspringrestapi/events/EventTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/gdsc5thspringrestapi/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/gdsc5thspringrestapi/events/Event.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/gdsc5thspringrestapi/events/EventTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/gdsc5thspringrestapi/events/EventTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,56 +76,8 @@
       <recent name="com.example.gdsc5thspringrestapi.events" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EventControllerTests.createEvent">
-    <configuration name="EventControllerTests.createEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gdsc-5th-spring-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
-      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventControllerTests" />
-      <option name="METHOD_NAME" value="createEvent" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EventControllerTests.createEvent_Bad_Request_Empty_Input" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gdsc-5th-spring-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
-      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventControllerTests" />
-      <option name="METHOD_NAME" value="createEvent_Bad_Request_Empty_Input" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EventControllerTests.createEvent_Bad_Request_Wrong_Input" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gdsc-5th-spring-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
-      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventControllerTests" />
-      <option name="METHOD_NAME" value="createEvent_Bad_Request_Wrong_Input" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EventTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.EventTest.testOffline">
+    <configuration name="EventTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gdsc-5th-spring-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -139,6 +88,22 @@
       <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
       <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventTest.testFree (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
+      <option name="METHOD_NAME" value="testFree(int,int,boolean)" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,6 +124,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EventTest.testFree2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
+      <option name="METHOD_NAME" value="testFree2(int,int,boolean)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventTest.testOffline" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gdsc-5th-spring-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.gdsc5thspringrestapi.events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.gdsc5thspringrestapi.events" />
+      <option name="MAIN_CLASS_NAME" value="com.example.gdsc5thspringrestapi.events.EventTest" />
+      <option name="METHOD_NAME" value="testOffline(java.lang.String,boolean)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Gdsc5thSpringRestApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gdsc-5th-spring-rest-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.gdsc5thspringrestapi.Gdsc5thSpringRestApiApplication" />
@@ -168,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EventControllerTests.createEvent" />
-        <item itemvalue="JUnit.EventTest" />
+        <item itemvalue="JUnit.EventTest.testOffline" />
+        <item itemvalue="JUnit.EventTest.testFree (1)" />
+        <item itemvalue="JUnit.EventTest.testFree2" />
+        <item itemvalue="JUnit.EventTest (1)" />
         <item itemvalue="JUnit.EventTest.testFree" />
-        <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request_Wrong_Input" />
-        <item itemvalue="JUnit.EventControllerTests.createEvent_Bad_Request_Empty_Input" />
       </list>
     </recent_temporary>
   </component>
