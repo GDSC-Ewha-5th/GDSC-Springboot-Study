@@ -43,6 +43,12 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+		<!--내가 임의로 추가함.. @Vaild 사용을 위해-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
