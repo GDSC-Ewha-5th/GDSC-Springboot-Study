@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import medongseon.inflearnrestapi.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
