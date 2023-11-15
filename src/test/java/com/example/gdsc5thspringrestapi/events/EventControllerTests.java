@@ -27,6 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc //mockMVC를 쓰기 위해
+//@ExtendWith(SpringExtension.class)
+//@SpringBootTest
+//@AutoConfigureMockMvc
 public class EventControllerTests {
     @Autowired
     MockMvc mockMvc;  //mocking되어 있는 dispatcherServlet을 상대로 가짜 요청을 만들어서 응답을 확인할 수 있음. 계층별로 나누어서 웹과 관련된 Bean만 등록함. 더 빠름.
@@ -113,10 +116,10 @@ public class EventControllerTests {
         this.mockMvc.perform(post("/api/events")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(eventDto)))
-                .andExpect(status().isBadRequest())
-                ;
+                .andExpect(status().isBadRequest());
 
     }
+
 
     @Test
     @TestDescription("입력 값이 잘못된 경우에 에러가 발생하는 테스트")

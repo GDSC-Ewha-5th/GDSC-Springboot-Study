@@ -7,13 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gdsc-5th-spring-rest-api" />
+        <module name="rest-api-with-spring" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gdsc-5th-spring-rest-api" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="gdsc-5th-spring-rest-api" options="-parameters" />
+      <module name="rest-api-with-spring" options="-parameters" />
     </option>
   </component>
 </project>
