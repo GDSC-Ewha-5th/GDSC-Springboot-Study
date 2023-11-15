@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.restapi.studyspring.events.EventControllerTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-15T06:21:56" hostname="DESKTOP-M5HAPDL" time="0.981">
+  <properties/>
+  <testcase name="createEvent()" classname="com.restapi.studyspring.events.EventControllerTests" time="0.981"/>
+  <system-out><![CDATA[15:21:51.268 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.restapi.studyspring.events.EventControllerTests]: EventControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:21:51.442 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.restapi.studyspring.StudySpringApplication for test class com.restapi.studyspring.events.EventControllerTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.5)
+
+2023-11-15T15:21:51.944+09:00  INFO 26760 --- [    Test worker] c.r.s.events.EventControllerTests        : Starting EventControllerTests using Java 17.0.7 with PID 26760 (started by 2076285 in C:\Users\2076285\Desktop\GDSC-Springboot-Study\study-spring)
+2023-11-15T15:21:51.947+09:00  INFO 26760 --- [    Test worker] c.r.s.events.EventControllerTests        : No active profile set, falling back to 1 default profile: "default"
+2023-11-15T15:21:52.926+09:00  INFO 26760 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-15T15:21:53.020+09:00  INFO 26760 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 1 JPA repository interfaces.
+2023-11-15T15:21:53.639+09:00  INFO 26760 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-11-15T15:21:53.929+09:00  INFO 26760 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:56742359-02e0-4b35-8bc7-9b730fc94397 user=SA
+2023-11-15T15:21:53.932+09:00  INFO 26760 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-11-15T15:21:54.010+09:00  INFO 26760 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-15T15:21:54.140+09:00  INFO 26760 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2023-11-15T15:21:54.144+09:00  INFO 26760 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-11-15T15:21:54.634+09:00  INFO 26760 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-15T15:21:55.689+09:00  INFO 26760 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-11-15T15:21:55.727+09:00  INFO 26760 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-15T15:21:56.321+09:00  WARN 26760 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-11-15T15:21:56.871+09:00  INFO 26760 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-11-15T15:21:56.872+09:00  INFO 26760 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-11-15T15:21:56.875+09:00  INFO 26760 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2023-11-15T15:21:56.917+09:00  INFO 26760 --- [    Test worker] c.r.s.events.EventControllerTests        : Started EventControllerTests in 5.25 seconds (process running for 6.973)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/events
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/hal+json", Content-Length:"399"]
+             Body = {"id":100,"name":"Spring","description":"REST API Development with Spring","beginEnrollmentDateTime":"2023-11-15T12:29:00","closeEnrollmentDateTime":"2023-11-17T12:29:00","beginEventDateTime":"2023-11-19T12:29:00","endEventDateTime":"2023-11-21T12:29:00","location":"노고산동 강히비앤비","basePrice":100,"maxPrice":200,"limitOfEnrollment":100,"offline":false,"free":true,"eventStatus":null}
+    Session Attrs = {}
+
+Handler:
+             Type = com.restapi.studyspring.events.EventController
+           Method = com.restapi.studyspring.events.EventController#createEvent(EventDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Location:"http://localhost/api/events/1", Content-Type:"application/hal+json"]
+     Content type = application/hal+json
+             Body = {"id":1,"name":"Spring","description":"REST API Development with Spring","beginEnrollmentDateTime":"2023-11-15T12:29:00","closeEnrollmentDateTime":"2023-11-17T12:29:00","beginEventDateTime":"2023-11-19T12:29:00","endEventDateTime":"2023-11-21T12:29:00","location":"ë¸ê³ ì]]>&#x82;<![CDATA[°ë]]>&#x8f;<![CDATA[]]>&#x99;<![CDATA[ ê°]]>&#x95;<![CDATA[í]]>&#x9e;<![CDATA[]]>&#x88;<![CDATA[ë¹]]>&#x84;<![CDATA[ì]]>&#x95;<![CDATA[¤ë¹]]>&#x84;<![CDATA[","basePrice":100,"maxPrice":200,"limitOfEnrollment":100,"offline":false,"free":false,"eventStatus":"DRAFT"}
+    Forwarded URL = null
+   Redirected URL = http://localhost/api/events/1
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
