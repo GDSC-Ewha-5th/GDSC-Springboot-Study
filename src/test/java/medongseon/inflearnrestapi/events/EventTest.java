@@ -47,12 +47,12 @@ class  EventTest {
         assertThat(event.isFree()).isEqualTo(isFree);
     }
 
-    private Object[] parametersForTestFree(){
-        return new Object[]{
-                new Object[]{0, 0, true},
-                new Object[]{100, 0, false},
-                new Object[]{0, 100, false},
-                new Object[]{100, 200, false},
+    private Object[] parametersForTestFree() {
+        return new Object[] {
+                new Object[] { 0, 0, true },
+                new Object[] { 100, 0, false },
+                new Object[] { 0, 100, false },
+                new Object[] { 100, 200, false }
         };
     }
 
