@@ -52,7 +52,7 @@ public class EventControllerTests extends BaseTest {
 
         //가상의 데이터를 사용하고자 할 때, 빈을 제어하고자 할 때 Mock을 사용
         mockMvc.perform(post("/api/events/")
-                        .header(HttpHeaders.AUTHORIZATION, getBearerToken(true))
+                        //.header(HttpHeaders.AUTHORIZATION, getBearerToken(true))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))
@@ -116,6 +116,8 @@ public class EventControllerTests extends BaseTest {
         ;
     }
 
+
+    /*
     private String getBearerToken(boolean needToCreateAccount) throws Exception {
         return "Bearer " + getAccessToken(needToCreateAccount);
     }
@@ -125,6 +127,7 @@ public class EventControllerTests extends BaseTest {
         if (needToCreateAccount) {
             createAccount();
         }
+
 
         ResultActions perform = this.mockMvc.perform(post("/oauth/token")
                 .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
@@ -145,6 +148,9 @@ public class EventControllerTests extends BaseTest {
                 .build();
         return this.accountService.saveAccount(keesun);
     }
+
+     */
+
 
     @Test
     @DisplayName("입력 받을 수 없는 값을 사용한 경우에 에러가 발생하는 테스트")

@@ -2,12 +2,11 @@ package GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.events;
 
 //https://github.com/keesun/study/tree/master/rest-api-with-spring
 
+import GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.common.ErrorsResource;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.server.mvc.ControllerLinkRelationProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -34,12 +33,12 @@ public class EventController {
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto,
                                       Errors errors){
         if (errors.hasErrors()){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(new ErrorsResource(errors));
         }
 
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);

@@ -1,5 +1,7 @@
 package GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.events;
 
+import GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.events.Event;
+import GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.events.EventController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
