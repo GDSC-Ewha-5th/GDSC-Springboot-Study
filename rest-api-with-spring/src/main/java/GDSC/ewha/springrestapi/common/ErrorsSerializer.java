@@ -14,6 +14,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
     @Override
     public void serialize(Errors errors, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
         // errors 안에는 에러가 여러 개라 배열 사용
+        gen.writeFieldName("errors");
         gen.writeStartArray();
         errors.getFieldErrors().forEach(e -> {
             try {
