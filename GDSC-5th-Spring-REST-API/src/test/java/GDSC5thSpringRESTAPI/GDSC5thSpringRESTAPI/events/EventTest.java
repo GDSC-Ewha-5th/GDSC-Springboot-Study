@@ -1,4 +1,4 @@
-package GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.event;
+package GDSC5thSpringRESTAPI.GDSC5thSpringRESTAPI.events;
 
 import org.junit.jupiter.api.Test;
 
