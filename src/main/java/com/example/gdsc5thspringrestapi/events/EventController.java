@@ -3,13 +3,16 @@ package com.example.gdsc5thspringrestapi.events;
 
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import java.net.URI;
 
@@ -51,8 +54,13 @@ public class EventController {
         Event event = modelMapper.map(eventDto, Event.class);  //event로 변환
         event.update();
         Event newEvent = this.eventRepository.save(event);
-        URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
-//        event.setId(10);
-        return ResponseEntity.created(createdUri).body(event);
+
+        WebMvcLinkBuilder setLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
+        URI createdUri = setLinkBuilder.toUri();
+        EventResource eventResource = new EventResource(event);
+        eventResource.add(linkTo(EventResource.class).withRel("query-events")); //eventResource로 변환해서 link추가
+//        eventResource.add(setLinkBuilder.withSelfRel()); eventResource안에 넣음
+        eventResource.add(setLinkBuilder.withRel("update-event"));
+        return ResponseEntity.created(createdUri).body(eventResource);
     }
 }

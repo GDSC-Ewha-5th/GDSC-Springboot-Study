@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor  //기본 생성자
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id") //객체 간의 연간관계가 있을 때 서로 상호참조하는 관계가 되면 equals와 hashcode로 구현한 코드 안에서 stackoverflow 발생할 수 있음. 따라서 id만 가지고 equals와 hashcode를 비교하겠다. 절대 다른 엔티티와 연관된 필드를 넣지 말기
+@EqualsAndHashCode(of = "id") //객체 간의 연관관계가 있을 때 서로 상호참조하는 관계가 되면 equals와 hashcode로 구현한 코드 안에서 stackoverflow 발생할 수 있음. 따라서 id만 가지고 equals와 hashcode를 비교하겠다. 절대 다른 엔티티와 연관된 필드를 넣지 말기
 @Entity
 public class Event {
     @Id @GeneratedValue
