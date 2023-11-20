@@ -1,5 +1,6 @@
 package com.example.gdsc5thspringrestapi.events;
 
+import com.example.gdsc5thspringrestapi.common.RestDocsConfiguration;
 import com.example.gdsc5thspringrestapi.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -7,10 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -27,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc //mockMVC를 쓰기 위해
+@AutoConfigureRestDocs  //RestDocs 적용
+@Import(RestDocsConfiguration.class)  //다른 spring bean 설정 파일을 읽어와서 사용
 //@ExtendWith(SpringExtension.class)
 //@SpringBootTest
 //@AutoConfigureMockMvc
@@ -74,6 +80,7 @@ public class EventControllerTests {
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.query-events").exists())
                 .andExpect(jsonPath("_links.update-event").exists())
+                .andDo(document("create-event")) //첫번재 인자가 문서의 이름이 됨
         ;
         //HAL의 스펙을 만족하는 응답을 받고싶다
         //perform 안에 주는게 요청임
