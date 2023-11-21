@@ -63,23 +63,23 @@ class EventTest {
 
     }
 
-    //junit5 에서는 실행 안되는 애들
-    @Test
-    @Parameters(method = "parametersForTestFree2")
-    public void testFree2(int basePrice, int maxPrice, boolean isFree){
-        //given
-        Event event = Event.builder()
-                .basePrice(basePrice)
-                .maxPrice(maxPrice)
-                .build();
-
-        //when
-        event.update();
-
-        //then
-        Assertions.assertThat(event.isFree()).isEqualTo(isFree);
-
-    }
+//    //junit5 에서는 실행 안되는 애들
+//    @Test
+//    @Parameters(method = "parametersForTestFree2")
+//    public void testFree2(int basePrice, int maxPrice, boolean isFree){
+//        //given
+//        Event event = Event.builder()
+//                .basePrice(basePrice)
+//                .maxPrice(maxPrice)
+//                .build();
+//
+//        //when
+//        event.update();
+//
+//        //then
+//        Assertions.assertThat(event.isFree()).isEqualTo(isFree);
+//
+//    }
 
     private Object[] parametersForTestFree2(){
         return new Object[]{

@@ -61,6 +61,7 @@ public class EventController {
         eventResource.add(linkTo(EventResource.class).withRel("query-events")); //eventResource로 변환해서 link추가
 //        eventResource.add(setLinkBuilder.withSelfRel()); eventResource안에 넣음
         eventResource.add(setLinkBuilder.withRel("update-event"));
+        eventResource.add(Link.of("/docs/index.html#resources-events").withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
     }
 }
