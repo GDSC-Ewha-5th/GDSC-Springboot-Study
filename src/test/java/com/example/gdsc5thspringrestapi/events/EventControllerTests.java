@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc //mockMVC를 쓰기 위해
 @AutoConfigureRestDocs  //RestDocs 적용
 @Import(RestDocsConfiguration.class)  //다른 spring bean 설정 파일을 읽어와서 사용
+@ActiveProfiles("test") //테스트용 설정파일 적용
 //@ExtendWith(SpringExtension.class)
 //@SpringBootTest
 //@AutoConfigureMockMvc
