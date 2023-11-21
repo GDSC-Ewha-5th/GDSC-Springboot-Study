@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,8 @@ public class EventController {
         eventResource.add(linkTo(EventController.class).slash(eventId).withSelfRel());
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event"));
+        Link profile = Link.of("/docs/index.html#resources-events-create").withRel("profile");
+        eventResource.add(profile);
         return ResponseEntity.created(createdUri).body(eventResource);
     }
 }
