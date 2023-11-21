@@ -1,5 +1,6 @@
 package com.project.restapiwithspring.events;
 
+import com.project.restapiwithspring.common.ErrorsResource;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,11 +31,11 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         Event newEvent = eventRepository.save(modelMapper.map(eventDto, Event.class));
@@ -51,5 +52,9 @@ public class EventController {
         Link profile = Link.of("/docs/index.html#resources-events-create").withRel("profile");
         eventResource.add(profile);
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    private ResponseEntity badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(ErrorsResource.modelOf(errors));
     }
 }
