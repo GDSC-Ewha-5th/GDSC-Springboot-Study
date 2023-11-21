@@ -1,6 +1,7 @@
 package com.example.gdsc5thspringrestapi.events;
 
 
+import com.example.gdsc5thspringrestapi.common.ErrorsResource;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.Link;
@@ -44,11 +45,13 @@ public class EventController {
 //                .build();
 
         if (errors.hasErrors()){ //@Valid에서 발생한 error를 넣어줌
-            return ResponseEntity.badRequest().body(errors);
+//            return ResponseEntity.badRequest().body(new ErrorsResource(errors));  //그냥 에러가 아닌 인덱스 링크가 추가된 에러리소스 반환
+            return badRequest(errors);
         }
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()){
-            return ResponseEntity.badRequest().body(errors);
+//            return ResponseEntity.badRequest().body(new ErrorsResource(errors));
+            return badRequest(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);  //event로 변환
@@ -63,5 +66,9 @@ public class EventController {
         eventResource.add(setLinkBuilder.withRel("update-event"));
         eventResource.add(Link.of("/docs/index.html#resources-events").withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    private ResponseEntity badRequest(Errors errors){  //에러 리턴 중복 부분 함수로 빼내기
+        return ResponseEntity.badRequest().body(new ErrorsResource(errors));
     }
 }
