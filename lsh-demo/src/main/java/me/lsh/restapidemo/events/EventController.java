@@ -1,7 +1,9 @@
 package me.lsh.restapidemo.events;
 
 import jakarta.validation.Valid;
+import me.lsh.restapidemo.common.ErrorsResource;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -37,7 +39,7 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors){
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().build();
+            return badRequest(errors);
         }
         //body(event)는 된다(json으로 변환되어서 나감) 그러나 error는 못 담음
         //java BeanSerializer(serial: 객체를 json으로 변환) objectMapper 써서 변환
@@ -45,7 +47,7 @@ public class EventController {
 
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().build();
+            return badRequest(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);
@@ -59,5 +61,9 @@ public class EventController {
         eventResource.add(selfLinkBuilder.withRel("update-event")); // Update
         eventResource.add(Link.of("/docs/index.html#resources-events-create").withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    private static ResponseEntity<ErrorsResource> badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(new ErrorsResource(errors));
     }
 }

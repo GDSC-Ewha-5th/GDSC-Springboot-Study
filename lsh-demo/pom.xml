@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<!-- <scope>test</scope> scope를 test로 변경했음-->
+			<scope>test</scope> <!-- H2는 test 할 때 DB -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

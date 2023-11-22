@@ -190,6 +190,7 @@ public class EventControllerTests {
                 .andExpect(jsonPath("$[0].defaultMessage").exists())
                 .andExpect(jsonPath("$[0].code").exists())
                 .andExpect(jsonPath("$[0].rejectedValue").exists())
+                .andExpect(jsonPath("_links.index").exists())
         ;
 
     }
