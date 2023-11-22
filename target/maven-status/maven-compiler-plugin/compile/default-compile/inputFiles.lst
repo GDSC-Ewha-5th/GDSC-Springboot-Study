@@ -1,1 +1,10 @@
-/Users/yangdongseon/SpringStudy_GDSC/REST-API-Practice/inflearn-rest-api/src/main/java/medongseon/inflearnrestapi/InflearnRestApiApplication.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventResource.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventValidator.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventController.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/common/TestDescription.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventDto.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventStatus.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/InflearnRestApiApplication.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/EventRepository.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/common/ErrorsSerializer.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/main/java/medongseon/inflearnrestapi/events/Event.java

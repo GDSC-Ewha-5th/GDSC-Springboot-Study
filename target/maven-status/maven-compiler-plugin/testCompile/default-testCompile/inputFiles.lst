@@ -1,1 +1,4 @@
-/Users/yangdongseon/SpringStudy_GDSC/REST-API-Practice/inflearn-rest-api/src/test/java/medongseon/inflearnrestapi/InflearnRestApiApplicationTests.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/test/java/medongseon/inflearnrestapi/common/RestDocsConfiguration.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/test/java/medongseon/inflearnrestapi/events/EventControllerTests.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/test/java/medongseon/inflearnrestapi/events/EventTest.java
+/Users/yangdongseon/Documents/GitHub/GDSC-Springboot-Study/src/test/java/medongseon/inflearnrestapi/InflearnRestApiApplicationTests.java
