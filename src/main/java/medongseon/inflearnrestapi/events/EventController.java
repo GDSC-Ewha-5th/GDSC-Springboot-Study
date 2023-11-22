@@ -1,5 +1,6 @@
 package medongseon.inflearnrestapi.events;
 
+import medongseon.inflearnrestapi.common.ErrorResource;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
@@ -30,19 +31,20 @@ public class EventController {
         this.eventValidator = eventValidator;
     }
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
+        if (errors.hasErrors()) {
+            return badRequest(errors);
         }
 
         eventValidator.validate(eventDto, errors);
-        if(errors.hasErrors()){
-            return ResponseEntity.badRequest().build();
+        if (errors.hasErrors()) {
+            return badRequest(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);
         event.update();
         Event newEvent = this.eventRepository.save(event);
+
         WebMvcLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
         URI createdUri = selfLinkBuilder.toUri();
         //HATEOS 관련 링크 만드는 부분
@@ -52,5 +54,8 @@ public class EventController {
         eventResource.add(selfLinkBuilder.withRel("update-event"));
         eventResource.add(Link.of("/docs/index.html#resources-events-create").withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+    private ResponseEntity badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(ErrorResource.of(errors));
     }
 }
