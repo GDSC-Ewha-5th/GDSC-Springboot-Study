@@ -4,12 +4,18 @@ package com.example.gdsc5thspringrestapi.events;
 import com.example.gdsc5thspringrestapi.common.ErrorsResource;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +72,16 @@ public class EventController {
         eventResource.add(setLinkBuilder.withRel("update-event"));
         eventResource.add(Link.of("/docs/index.html#resources-events").withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    @GetMapping
+    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler){
+        //페이지와 관련된 링크 정보 넘겨주기
+        Page<Event> page = this.eventRepository.findAll(pageable);
+        //PagedModel<EntityModel<Event>> pagedResources = assembler.toModel(page);
+        var pagedResources = assembler.toModel(page, e -> new EventResource(e));  //각각의 param을 eventResource로 변경
+        pagedResources.add(Link.of("/docs/index.html#resources-events-list").withRel("profile"));
+        return ResponseEntity.ok(pagedResources);
     }
 
     private ResponseEntity badRequest(Errors errors){  //에러 리턴 중복 부분 함수로 빼내기
