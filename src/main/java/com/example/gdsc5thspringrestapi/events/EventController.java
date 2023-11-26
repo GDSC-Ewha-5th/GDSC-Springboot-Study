@@ -15,13 +15,11 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.net.URI;
+import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo; //강의 자료랑 다름! 구글링함
 
@@ -82,6 +80,19 @@ public class EventController {
         var pagedResources = assembler.toModel(page, e -> new EventResource(e));  //각각의 param을 eventResource로 변경
         pagedResources.add(Link.of("/docs/index.html#resources-events-list").withRel("profile"));
         return ResponseEntity.ok(pagedResources);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getEvent(@PathVariable Integer id){
+        Optional<Event> optionalEvent = this.eventRepository.findById(id);
+        if (optionalEvent.isEmpty()){ //비어있는 경우
+            return ResponseEntity.notFound().build();
+        }
+        Event event = optionalEvent.get();
+        EventResource eventResource = new EventResource(event);
+        eventResource.add(Link.of("/docs/index.html#resources-events-get").withRel("profile")); //프로필 링크 추가
+        return ResponseEntity.ok(eventResource);
+
     }
 
     private ResponseEntity badRequest(Errors errors){  //에러 리턴 중복 부분 함수로 빼내기
