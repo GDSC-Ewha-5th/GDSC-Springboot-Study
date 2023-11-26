@@ -1,6 +1,7 @@
 package com.example.gdsc5thspringrestapi.events;
 
 
+import com.example.gdsc5thspringrestapi.common.BaseControllerTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.assertj.core.api.Assertions;
@@ -16,7 +17,7 @@ import org.junit.runner.RunWith;
 import java.util.stream.Stream;
 
 @RunWith(JUnitParamsRunner.class)
-class EventTest {
+class EventTest extends BaseControllerTest {
 
     @Test
     public void builder(){  //빌더가 있는지 확인하는 테스트

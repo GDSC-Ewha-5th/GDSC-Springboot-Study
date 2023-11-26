@@ -1,5 +1,6 @@
 package com.example.gdsc5thspringrestapi.events;
 
+import com.example.gdsc5thspringrestapi.common.BaseControllerTest;
 import com.example.gdsc5thspringrestapi.common.RestDocsConfiguration;
 import com.example.gdsc5thspringrestapi.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,28 +36,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //@WebMvcTest  //웹과 괸련된 bean 주입. 웹용 bean만 등록하므로 repository를 bean으로 등록해주지 않음 -> Mockbean 이용
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc //mockMVC를 쓰기 위해
-@AutoConfigureRestDocs  //RestDocs 적용
-@Import(RestDocsConfiguration.class)  //다른 spring bean 설정 파일을 읽어와서 사용
-@ActiveProfiles("test") //테스트용 설정파일 적용
 //@ExtendWith(SpringExtension.class)
 //@SpringBootTest
 //@AutoConfigureMockMvc
-public class EventControllerTests {
-    @Autowired
-    MockMvc mockMvc;  //mocking되어 있는 dispatcherServlet을 상대로 가짜 요청을 만들어서 응답을 확인할 수 있음. 계층별로 나누어서 웹과 관련된 Bean만 등록함. 더 빠름.
+public class EventControllerTests extends BaseControllerTest {
 
-    @Autowired
-    ObjectMapper objectMapper;
 
 //    @MockBean
     @Autowired
     EventRepository eventRepository; //eventRepository에 해당하는 Bean을 mock으로 만듦. mock객체라서 save하더라도 return되는 값이 null임
-
-    @Autowired
-    ModelMapper modelMapper;
 
 
     @Test
