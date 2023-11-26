@@ -95,6 +95,34 @@ public class EventController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updateEvent(@PathVariable Integer id, @RequestBody @Valid EventDto eventDto, Errors errors){
+        Optional<Event> optionalEvent = this.eventRepository.findById(id);
+
+        if (optionalEvent.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        if (errors.hasErrors()){
+            return badRequest(errors);
+        }
+
+        this.eventValidator.validate(eventDto, errors);
+        if (errors.hasErrors()){
+            return badRequest(errors);
+        }
+
+        Event existingEvent = optionalEvent.get();
+        //dto에 있는 값으로 전부 변경
+        this.modelMapper.map(eventDto, existingEvent); //src dest
+        Event savedEvent = this.eventRepository.save(existingEvent);
+
+        EventResource eventResource = new EventResource(savedEvent);
+        eventResource.add(Link.of("/docs/index.html#resources-events-update").withRel("profile"));
+
+        return ResponseEntity.ok(eventResource);
+    }
+
     private ResponseEntity badRequest(Errors errors){  //에러 리턴 중복 부분 함수로 빼내기
         return ResponseEntity.badRequest().body(new ErrorsResource(errors));
     }
