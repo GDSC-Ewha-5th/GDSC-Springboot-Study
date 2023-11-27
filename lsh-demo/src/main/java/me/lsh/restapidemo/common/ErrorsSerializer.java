@@ -13,6 +13,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
 
     @Override
     public void serialize(Errors errors, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
+        gen.writeFieldName("errors"); //버전 업데이트 이슈
         gen.writeStartArray();
         //여러개 에러 배열로 담아주기 위해
         //Validator에서 rejectValue(): 필드 에러, reject(): Global 에러
@@ -22,7 +23,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
                 gen.writeStringField("field", e.getField());
                 gen.writeStringField("objectName", e.getObjectName());
                 gen.writeStringField("code", e.getCode());
-                gen.writeStringField("DefaultMessage", e.getDefaultMessage());
+                gen.writeStringField("defaultMessage", e.getDefaultMessage());
                 Object rejectedValue = e.getRejectedValue();
                 if (rejectedValue != null) {
                     gen.writeStringField("rejectedValue", rejectedValue.toString());
@@ -39,7 +40,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
                 gen.writeStartObject();
                 gen.writeStringField("objectName", e.getObjectName());
                 gen.writeStringField("code", e.getCode());
-                gen.writeStringField("DefaultMessage", e.getDefaultMessage());
+                gen.writeStringField("defaultMessage", e.getDefaultMessage());
                 gen.writeEndObject();
             } catch (IOException e1) {
                 e1.printStackTrace();
