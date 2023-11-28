@@ -68,7 +68,8 @@ public class EventControllerTests {
 
     @Test
     public void createEvent_Bad_Request() throws Exception {
-        // event Dto 사용하면 값들이 잘 들어오고
+        /* 확인하고 싶은 사항
+        *  원하는 입력값 [이외의] 값이 들어왔을 경우 bad request */
         Event event = Event.builder()
                 .id(100)
                 .name("Spring")
@@ -97,6 +98,21 @@ public class EventControllerTests {
                 // console에 보이는 내용 다 andExpect 를 통해서 검사 할 수 있음
                 .andExpect(status().isBadRequest()) // 400 bad request
         ;
+    }
+
+    @Test
+    public void createEvent_Bad_Request_Empty_Input() throws Exception {
+        /* 확인하고 싶은 사항
+        * 입력값이 잘못 되었을 때 bad request */
+        EventDto eventDto = EventDto.builder().build();
+
+        mockMvc.perform(post("/api/events/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                //.andDo(print())
+                .andExpect(status().isBadRequest())
+                ;
+
     }
 
 }
