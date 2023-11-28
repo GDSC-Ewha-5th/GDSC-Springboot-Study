@@ -20,19 +20,18 @@ public class EventController {
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
 
-
     public EventController(EventRepository eventRepository,ModelMapper modelMapper){
         this.eventRepository = eventRepository;
         this.modelMapper = modelMapper;
     }
-    @PostMapping("/api/events/")
+    @PostMapping // ("/api/events/") -> 이거 때문에
     public ResponseEntity createEvent(@RequestBody EventDto eventDto) { // 받기로 한 값들만 들어오게 됨
         // event Dto -> event 로 바꿔줌! 객체의 데이터들을 모두 mapping 해줌
         //this.eventRepository.save(event);
         Event event = modelMapper.map(eventDto, Event.class);
-
         Event newEvent = this.eventRepository.save(event);
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
+        event.setId(10);
         return ResponseEntity.created(createdUri).body(event);
     }
 }

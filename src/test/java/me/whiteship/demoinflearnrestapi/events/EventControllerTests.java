@@ -31,7 +31,7 @@ public class EventControllerTests {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Test
+    @Test // EventDto 를 사용하여 값을 만든 경우 잘 동작함
     public void createEvent() throws Exception {
         // event Dto 사용하면 값들이 잘 들어오고
         EventDto event = EventDto.builder()
@@ -51,17 +51,18 @@ public class EventControllerTests {
         // save 에 전달하게 되는 객체는 새로 만든 객체임
         // -> 따라서 적용이 안되고 null 이 return 됨
         mockMvc.perform(post("/api/events/")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
                 // console에 보이는 내용 다 andExpect 를 통해서 검사 할 수 있음
-                .andExpect(status().isCreated())
-                .andExpect((jsonPath("id").exists()))
+                .andExpect(status().isCreated()) // 201상태인지 확인
+                .andExpect(jsonPath("id").exists())
                 .andExpect(header().exists(HttpHeaders.LOCATION))
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE,MediaTypes.HAL_JSON_VALUE))
                 .andExpect(jsonPath("id").value(Matchers.not(100)))
                 .andExpect(jsonPath("free").value(Matchers.not(true)))
+                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
         ;
     }
 
@@ -89,20 +90,12 @@ public class EventControllerTests {
         // -> 따라서 적용이 안되고 null 이 return 됨
 
         mockMvc.perform(post("/api/events/")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
                 // console에 보이는 내용 다 andExpect 를 통해서 검사 할 수 있음
-                .andExpect(status().isBadRequest())
-                /*
-                .andExpect((jsonPath("id").exists()))
-                .andExpect(header().exists(HttpHeaders.LOCATION))
-                .andExpect(header().string(HttpHeaders.CONTENT_TYPE,MediaTypes.HAL_JSON_VALUE))
-                .andExpect(jsonPath("id").value(Matchers.not(100)))
-                .andExpect(jsonPath("free").value(Matchers.not(true)))
-                 */
-
+                .andExpect(status().isBadRequest()) // 400 bad request
         ;
     }
 

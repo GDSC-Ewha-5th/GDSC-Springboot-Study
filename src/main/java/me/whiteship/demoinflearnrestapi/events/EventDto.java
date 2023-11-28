@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Builder
-@NoArgsConstructor @AllArgsConstructor @Data
+@Builder @NoArgsConstructor @AllArgsConstructor @Data
 public class EventDto {
     private String name;
     private String description;
