@@ -1,5 +1,6 @@
 package me.whiteship.demoinflearnrestapi.events;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.whiteship.demoinflearnrestapi.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,8 +33,8 @@ public class EventControllerTests {
     ObjectMapper objectMapper;
 
     @Test // EventDto 를 사용하여 값을 만든 경우 잘 동작함
+    @TestDescription("정상적으로 이벤트를 생성하는 테스트")
     public void createEvent() throws Exception {
-        // event Dto 사용하면 값들이 잘 들어오고
         EventDto event = EventDto.builder()
                 .name("Spring")
                 .description("REST API Development with Spring")
@@ -67,9 +68,8 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력 받을 수 없는 값을 사용한 경우에 에러발생하는 테스트")
     public void createEvent_Bad_Request() throws Exception {
-        /* 확인하고 싶은 사항
-        *  원하는 입력값 [이외의] 값이 들어왔을 경우 bad request */
         Event event = Event.builder()
                 .id(100)
                 .name("Spring")
@@ -101,9 +101,8 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 비어있는 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Empty_Input() throws Exception {
-        /* 확인하고 싶은 사항
-        * 입력값이 잘못 되었을 때 bad request */
         EventDto eventDto = EventDto.builder().build();
 
         mockMvc.perform(post("/api/events/")
@@ -115,9 +114,8 @@ public class EventControllerTests {
     }
 
     @Test
+    @TestDescription("입력값이 잘못된 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception {
-        /* 확인하고 싶은 사항
-         * 입력값이 말이 안되는 값이 들어갔을 때  bad request */
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
                 .description("REST API Development with Spring")
@@ -140,5 +138,4 @@ public class EventControllerTests {
                 .andExpect(status().isBadRequest())
         ;
     }
-
 }
