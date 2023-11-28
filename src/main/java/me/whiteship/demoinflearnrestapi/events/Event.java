@@ -1,7 +1,5 @@
 package me.whiteship.demoinflearnrestapi.events;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,11 +19,11 @@ public class Event {
     private int maxPrice; // (optional)
     private int limitOfEnrollment;
 
+    @Id
+    @GeneratedValue
     private Integer id;
     private boolean offline;
     private boolean free;
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
-
-
 }
