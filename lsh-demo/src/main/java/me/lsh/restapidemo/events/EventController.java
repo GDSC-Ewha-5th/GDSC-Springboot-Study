@@ -3,7 +3,6 @@ package me.lsh.restapidemo.events;
 import jakarta.validation.Valid;
 import me.lsh.restapidemo.common.ErrorsResource;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;

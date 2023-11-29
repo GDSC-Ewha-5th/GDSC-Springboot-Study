@@ -1,21 +1,12 @@
 package me.lsh.restapidemo.events;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import me.lsh.restapidemo.common.RestDocsConfiguration;
+import me.lsh.restapidemo.common.BaseControllerTest;
 import me.lsh.restapidemo.common.TestDescription;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
@@ -29,25 +20,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class) //Bean 불러오기
-public class EventControllerTests {
-    @Autowired
-    MockMvc mockMvc; //가짜 요청 만들어서 보내고 응답 확인할 수 있는 Test 만들수있음.
-    // Slicing Test 웹과 관련된 빈들만 테스트. dispatch sublet이란거 만들어야 함, 웹서버 띄우지x
-
-    @Autowired
-    ObjectMapper objectMapper;
+public class EventControllerTests extends BaseControllerTest {
 
     @Autowired
     EventRepository eventRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
 
     @Test
     @TestDescription("정상적으로 이벤트를 생성하는 테스트")//JUnit5는 이런 기능 Annotation 지원
@@ -204,7 +180,7 @@ public class EventControllerTests {
     @TestDescription("30개의 이벤트를 10개씩 두번째 페이지 조회하기")
     public void queryEvents() throws Exception {
         //Given
-        IntStream.range(0, 30).forEach(this::generateEvent); //메소드 레퍼런스. 람다식?
+        IntStream.range(0, 30).forEach(this::generateEvent); //메소드 레퍼런스. 람다식.
 
         //When
         this.mockMvc.perform(get("/api/events")
@@ -282,7 +258,6 @@ public class EventControllerTests {
 
     @Test
     @TestDescription("입력값이 잘못된 경우에 이벤트 수정 실패")
-    //입력값이 잘못된다란? 로직에 값 자체가 없음 or 로직상 잘못됨
     public void updateEvent400_Wrong() throws Exception {
         //Given
         Event event = this.generateEvent(200);
@@ -300,7 +275,6 @@ public class EventControllerTests {
 
     @Test
     @TestDescription("존재하지 않는 이벤트 수정 실패")
-    //입력값이 잘못된다란? 로직에 값 자체가 없음 or 로직상 잘못됨
     public void updateEvent404() throws Exception {
         Event event = this.generateEvent(200);
         EventDto eventDto = this.modelMapper.map(event, EventDto.class); //데이터 유효
