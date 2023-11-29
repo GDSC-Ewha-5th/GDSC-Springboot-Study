@@ -1,12 +1,14 @@
 package medongseon.inflearnrestapi.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import medongseon.inflearnrestapi.common.BaseControllerTest;
 import medongseon.inflearnrestapi.common.RestDocsConfiguration;
 import medongseon.inflearnrestapi.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,23 +33,14 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-@ActiveProfiles("test")
-public class EventControllerTests {
-    @Autowired
-    MockMvc mockMvc;
+public class EventControllerTests extends BaseControllerTest {
 
-    @Autowired
-    ObjectMapper objectMapper;
 
     @Autowired
     EventRepository eventRepository;
@@ -240,18 +233,95 @@ public class EventControllerTests {
                 .andExpect(jsonPath("id").exists())
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.profile").exists())
-                .andDo(document("get-an-event")) // 문서화
+                .andDo(document("get-an-event")) //문서화 해주기
         ;
     }
 
     @Test
     @TestDescription("없는 이벤트를 조회했을 때 404 응답 받기")
     public void getEvent404() throws Exception {
-        // Given - 이벤트 생성 X
+        //이벤트 만들지 않음
+        // When & Then
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/events/11883"))
+                .andExpect(status().isNotFound())
+        ;
+    }
+
+
+    @Test
+    @TestDescription("이벤트를 정상적으로 수정하기")
+    public void updateEvent() throws Exception {
+        //Given
+        Event event = this.generateEvent(200);
+
+        EventDto eventDto = this.modelMapper.map(event, EventDto.class); //이벤트 수정 Dto
+        String eventName = "Updated Event";
+        eventDto.setName(eventName);
+
+        //When & Then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value(eventName))
+                .andExpect(jsonPath("_links.self").exists())
+                .andDo(document("update-event")) // 문서화 하기
+        ;
+    }
+
+    @Test
+    @TestDescription("입력값이 비어 있는 경우에 이벤트 수정 실패")
+    public void updateEvent400Empty() throws Exception {
+        // Given
+        Event event = this.generateEvent(200);
+
+        EventDto eventDto = new EventDto();
 
         // When & Then
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/events/11883")) // URI path에 id 값 넣어줌
-                .andExpect(status().isNotFound()) // 404
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isBadRequest()) //400
+        ;
+    }
+
+
+    @Test
+    @TestDescription("입력값이 잘못된 경우에 이벤트 수정 실패")
+    public void updateEvent400Wrong() throws Exception {//400
+        // Given
+        Event event = this.generateEvent(200);
+
+        EventDto eventDto = this.modelMapper.map(event, EventDto.class);
+
+        // 값이 잘못된 경우
+        eventDto.setBasePrice(20000);
+        eventDto.setMaxPrice(1000);
+
+        // When & Then
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    @TestDescription("존재하지 않는 이벤트 수정 실패")//404
+    public void updateEvent404() throws Exception {
+        // Given
+        Event event = this.generateEvent(200);
+        EventDto eventDto = this.modelMapper.map(event, EventDto.class);
+
+        // When & Then
+        this.mockMvc.perform(put("/api/events/11231", event.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andDo(print())
+                .andExpect(status().isNotFound())
         ;
     }
 
@@ -261,8 +331,19 @@ public class EventControllerTests {
         Event event = Event.builder()
                 .name("event " + index)
                 .description("test index " + index)
+                .beginEnrollmentDateTime(LocalDateTime.of(2023, 11, 11, 11, 11))
+                .closeEnrollmentDateTime(LocalDateTime.of(2023, 11, 12, 11, 11))
+                .beginEventDateTime(LocalDateTime.of(2023, 11, 22, 11, 11))
+                .endEventDateTime(LocalDateTime.of(2023, 11, 23, 11, 11))
+                .basePrice(100)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("이화여자대학교 신공학관")
+                .free(false)
+                .offline(true)
+                .eventStatus(EventStatus.DRAFT)
                 .build();
 
-       return this.eventRepository.save(event);
+        return this.eventRepository.save(event);
     }
 }

@@ -1,0 +1,17 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/api/events/31' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "name" : "Updated Event",
+  "description" : "test index 200",
+  "beginEnrollmentDateTime" : "2023-11-11T11:11:00",
+  "closeEnrollmentDateTime" : "2023-11-12T11:11:00",
+  "beginEventDateTime" : "2023-11-22T11:11:00",
+  "endEventDateTime" : "2023-11-23T11:11:00",
+  "location" : "이화여자대학교 신공학관",
+  "basePrice" : 100,
+  "maxPrice" : 200,
+  "limitOfEnrollment" : 100
+}'
+----
