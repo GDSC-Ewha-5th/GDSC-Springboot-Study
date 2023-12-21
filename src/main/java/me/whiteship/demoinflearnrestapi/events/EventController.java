@@ -40,7 +40,7 @@ public class EventController {
 
         eventValidator.validate(eventDto,errors);
         if(errors.hasErrors()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors); // ERROR BODY 응답을 RETURN  하게 했어야 함
         }
 
         Event event = modelMapper.map(eventDto, Event.class);

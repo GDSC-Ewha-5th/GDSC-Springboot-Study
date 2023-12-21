@@ -40,8 +40,8 @@ public class EventControllerTests {
                 .description("REST API Development with Spring")
                 .beginEnrollmentDateTime(LocalDateTime.of(2023,11,22,12,55))
                 .closeEnrollmentDateTime(LocalDateTime.of(2023,11,23,12,55))
-                .beginEnrollmentDateTime(LocalDateTime.of(2023,11,24,12,55))
-                .closeEnrollmentDateTime(LocalDateTime.of(2023,11,25,12,55))
+                .beginEventDateTime(LocalDateTime.of(2023,11,24,12,55))
+                .endEventDateTime(LocalDateTime.of(2023,11,25,12,55))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -57,14 +57,14 @@ public class EventControllerTests {
                         .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
                 // console에 보이는 내용 다 andExpect 를 통해서 검사 할 수 있음
-                .andExpect(status().isCreated()) // 201상태인지 확인
-                .andExpect(jsonPath("id").exists())
-                .andExpect(header().exists(HttpHeaders.LOCATION))
-                .andExpect(header().string(HttpHeaders.CONTENT_TYPE,MediaTypes.HAL_JSON_VALUE))
-                .andExpect(jsonPath("id").value(Matchers.not(100)))
-                .andExpect(jsonPath("free").value(Matchers.not(true)))
-                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
-        ;
+                    .andExpect(status().isCreated()) // 201상태인지 확인
+                    .andExpect(jsonPath("id").exists())
+                    .andExpect(header().exists(HttpHeaders.LOCATION))
+                    .andExpect(header().string(HttpHeaders.CONTENT_TYPE,MediaTypes.HAL_JSON_VALUE))
+                    .andExpect(jsonPath("id").value(Matchers.not(100)))
+                    .andExpect(jsonPath("free").value(Matchers.not(true)))
+                    .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+            ;
     }
 
     @Test
@@ -76,8 +76,8 @@ public class EventControllerTests {
                 .description("REST API Development with Spring")
                 .beginEnrollmentDateTime(LocalDateTime.of(2023,11,22,12,55))
                 .closeEnrollmentDateTime(LocalDateTime.of(2023,11,23,12,55))
-                .beginEnrollmentDateTime(LocalDateTime.of(2023,11,24,12,55))
-                .closeEnrollmentDateTime(LocalDateTime.of(2023,11,25,12,55))
+                .beginEventDateTime(LocalDateTime.of(2023,11,24,12,55))
+                .endEventDateTime(LocalDateTime.of(2023,11,25,12,55))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -94,9 +94,9 @@ public class EventControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaTypes.HAL_JSON)
                         .content(objectMapper.writeValueAsString(event)))
-                .andDo(print())
+                //.andDo(print())
                 // console에 보이는 내용 다 andExpect 를 통해서 검사 할 수 있음
-                .andExpect(status().isBadRequest()) // 400 bad request
+                        .andExpect(status().isBadRequest()) // 400 bad request
         ;
     }
 
@@ -122,8 +122,8 @@ public class EventControllerTests {
                 // wrong input -> annotation 으로 검증하기 어려운 경우임 (validate 를 따로 만들어야 함)
                 .beginEnrollmentDateTime(LocalDateTime.of(2023,11,25,12,55))
                 .closeEnrollmentDateTime(LocalDateTime.of(2023,11,24,12,55))
-                .beginEnrollmentDateTime(LocalDateTime.of(2023,11,23,12,55))
-                .closeEnrollmentDateTime(LocalDateTime.of(2023,11,22,12,55))
+                .beginEventDateTime(LocalDateTime.of(2023,11,23,12,55))
+                .endEventDateTime(LocalDateTime.of(2023,11,22,12,55))
                 // -------------
                 .basePrice(10000) // wrong
                 .maxPrice(200)
@@ -131,11 +131,14 @@ public class EventControllerTests {
                 .location("Ewha Womans University")
                 .build();
 
-        mockMvc.perform(post("/api/events/")
+        this.mockMvc.perform(post("/api/events/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(eventDto)))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$[0].objectName").exists())
+                .andExpect(jsonPath("$[0].defaultMessage").exists())
+                .andExpect(jsonPath("$[0].code").exists())
         ;
     }
 }
