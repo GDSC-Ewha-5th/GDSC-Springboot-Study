@@ -1,5 +1,8 @@
 package GDSC.ewha.springrestapi.events;
 
+import GDSC.ewha.springrestapi.accounts.Account;
+import GDSC.ewha.springrestapi.accounts.AccountSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +32,10 @@ public class Event {
     private boolean free; // 이 모임이 유료인지 무료인지
     @Enumerated(EnumType.STRING) // 기본값인 ORDINAL을 STRING으로 바꾸기
     private EventStatus eventStatus = EventStatus.DRAFT;
+
+    @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
+    private Account manger;
 
     public void update() {
         // Update free
