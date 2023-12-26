@@ -1,5 +1,6 @@
 package com.example.gdsc5thspringrestapi.events;
 
+import com.example.gdsc5thspringrestapi.accounts.Account;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,8 @@ public class Event {
     @Enumerated(EnumType.STRING)  //기본값 ordinary로 0, 1 ,2 숫자 값이 저장됨. String은 나중에 내부 순서가 바뀌어도 꼬이지 않음
     private EventStatus eventStatus = EventStatus.DRAFT;
 
+    @ManyToOne
+    private Account manager; //account 관리자
     public void update() {
         //update free
         if (this.basePrice == 0 && this.maxPrice == 0){
