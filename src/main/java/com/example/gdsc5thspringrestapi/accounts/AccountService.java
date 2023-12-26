@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,6 +19,16 @@ public class AccountService implements UserDetailsService {
     @Autowired
     AccountRepository accountRepository;
     //우리가 사용하는 domain을 우리가 정해놓은 인터페이스로 변환
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    public Account saveAccount(Account account){
+        account.setPassword(this.passwordEncoder.encode(account.getPassword()));
+        return this.accountRepository.save(account); //인코딩해서 저장하도록
+    }
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByEmail(username)

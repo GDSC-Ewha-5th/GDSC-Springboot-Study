@@ -13,9 +13,4 @@ public class Gdsc5thSpringRestApiApplication {
 		SpringApplication.run(Gdsc5thSpringRestApiApplication.class, args);
 	}
 
-	//ModelMapper bean에 등록하기
-	@Bean
-	public ModelMapper modelMapper(){
-		return new ModelMapper();
-	}
 }
