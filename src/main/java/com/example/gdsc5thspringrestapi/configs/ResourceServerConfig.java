@@ -23,8 +23,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .anonymous()
                     .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/api/**") //익명 전부 허용
-                .anonymous()
+                .requestMatchers(HttpMethod.GET, "/api/**") //anonymous하면 anonymous만 사용가능하게 됨. 인증하면 접근 불가능해짐
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

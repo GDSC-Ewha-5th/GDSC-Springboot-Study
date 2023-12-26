@@ -33,7 +33,7 @@ public class AccountService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username)); //user에 해당하는 account 객체 없으면 에러
-        return new User(account.getEmail(), account.getPassword(), authorities(account.getRoles()));
+        return new AccountAdaptor(account);
     }
 
     private Collection<? extends GrantedAuthority> authorities(Set<AccountRole> roles) {
