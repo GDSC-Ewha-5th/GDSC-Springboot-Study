@@ -4,6 +4,7 @@ import com.example.gdsc5thspringrestapi.accounts.Account;
 import com.example.gdsc5thspringrestapi.accounts.AccountRepository;
 import com.example.gdsc5thspringrestapi.accounts.AccountRole;
 import com.example.gdsc5thspringrestapi.accounts.AccountService;
+import com.example.gdsc5thspringrestapi.common.AppProperties;
 import com.example.gdsc5thspringrestapi.common.BaseControllerTest;
 import com.example.gdsc5thspringrestapi.common.RestDocsConfiguration;
 import com.example.gdsc5thspringrestapi.common.TestDescription;
@@ -60,6 +61,9 @@ public class EventControllerTests extends BaseControllerTest {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    AppProperties appProperties;
     @Before
     public void setUp(){  //test가 돌고 있는 중에는 db를 공유함. 데이터가 독립적이지 않음.
         this.eventRepository.deleteAll();
@@ -161,23 +165,18 @@ public class EventControllerTests extends BaseControllerTest {
 
     private String getAccessToken() throws Exception {
         //given
-        String password = "keesun";
-        String username = "keesun@email.com";
         Account keesun = Account.builder()
-                .email(username)
-                .password(password)
+                .email(appProperties.getUserUsername())
+                .password(appProperties.getUserPassword())
                 .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                 .build();
         this.accountService.saveAccount(keesun);
 
-        String clientId = "myApp";
-        String clientSecret = "pass";
-
 
          ResultActions perform = this.mockMvc.perform(post("/oauth/token")
-                        .with(httpBasic(clientId, clientSecret))
-                        .param("username", username)
-                        .param("password", password)
+                        .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+                        .param("username", appProperties.getUserUsername())
+                        .param("password", appProperties.getUserPassword())
                         .param("grant_type", "password"));
          var responseBody = perform.andReturn().getResponse().getContentAsString();
         Jackson2JsonParser parser = new Jackson2JsonParser();
