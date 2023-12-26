@@ -1,6 +1,8 @@
 package com.example.gdsc5thspringrestapi.events;
 
 import com.example.gdsc5thspringrestapi.accounts.Account;
+import com.example.gdsc5thspringrestapi.accounts.AccountSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,6 +34,7 @@ public class Event {
     private EventStatus eventStatus = EventStatus.DRAFT;
 
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
     private Account manager; //account 관리자
     public void update() {
         //update free
